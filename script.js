@@ -5,6 +5,6 @@ function updatePage() {
   var dropdownMenuID = dropdownMenu.id;
   var selectedOption = dropdownMenu.value;
 
-  console.log(dropdownMenuID);
+//  console.log(dropdownMenuID);
   console.log(selectedOption);
 };
