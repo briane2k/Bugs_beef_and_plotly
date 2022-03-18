@@ -1,25 +1,37 @@
+// Sort the data array using the greekSearchResults value
+data.sort(function(a, b) {
+  return parseFloat(b.greekSearchResults) - parseFloat(a.greekSearchResults);
+});
 
+// Slice the first 10 objects for plotting
+data = data.slice(0, 10);
 
-//var topFiveCityNames = cityGrowths.map(city => city.City);
-//var topFiveCityGrowths = cityGrowths.map(city => parseInt(city.Increase_from_2016));
-var topFiveCityNames = cityGrowths.map(city => city.City);
-var topFiveCityPopO = cityGrowths.map(city => parseInt(city.population));
-var topFiveCityPop = topFiveCityPopO.sort((a,b) => b - a).slice(0,7);
+// Reverse the array due to Plotly's defaults
+data = data.reverse();
 
-
-
-var trace = {
-    x: topFiveCityNames,
-    y: topFiveCityPop,
-    type: "bar"
+// Trace1 for the Greek Data
+var trace1 = {
+  x: data.map(row => row.greekSearchResults),
+  y: data.map(row => row.greekName),
+  text: data.map(row => row.greekName),
+  name: "Greek",
+  type: "bar",
+  orientation: "h"
 };
-var data = [trace];
 
+// data
+var data = [trace1];
+
+// Apply the group bar mode to the layout
 var layout = {
-    title: "Largest Cities",
-    xaxis: {title: "City"},
-    yaxis: {title: "Population, 2016-1017"}
+  title: "Greek gods search results",
+  margin: {
+    l: 100,
+    r: 100,
+    t: 100,
+    b: 100
+  }
 };
 
-Plotly.newPlot("bar-plot", data, layout);
-
+// Render the plot to the div tag with id "plot"
+Plotly.newPlot("plot", data, layout);
